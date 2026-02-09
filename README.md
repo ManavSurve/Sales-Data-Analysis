@@ -20,111 +20,70 @@ Fluctuating sales trends and seasonal demand make it difficult for stakeholders 
 
 ### Steps followed 
 
-- Step 1 : Load data into Power BI Desktop, dataset is a csv file.
-- Step 2 : Open power query editor & in view tab under Data preview section, check "column distribution", "column quality" & "column profile" options.
-- Step 3 : Also since by default, profile will be opened only for 1000 rows so you need to select "column profiling based on entire dataset".
-- Step 4 : It was observed that in none of the columns errors & empty values were present except column named "Arrival Delay".
-- Step 5 : For calculating average delay time, null values were not taken into account as only less than 1% values are null in this column(i.e column named "Arrival Delay") 
-- Step 6 : In the report view, under the view tab, theme was selected.
-- Step 7 : Since the data contains various ratings, thus in order to represent ratings, a new visual was added using the three ellipses in the visualizations pane in report view. 
-- Step 8 : Visual filters (Slicers) were added for four fields named "Class", "Customer Type", "Gate Location" & "Type of travel".
-- Step 9 : Two card visuals were added to the canvas, one representing average departure delay in minutes & other representing average arrival delay in minutes.
-           Using visual level filter from the filters pane, basic filtering was used & null values were unselected for consideration into average calculation.
-           
-           Although, by default, while calculating average, blank values are ignored.
-- Step 10 : A bar chart was also added to the report design area representing the number of satisfied & neutral/unsatisfied customers. While creating this visual, field named "Gender" was also added to the Legends bucket, thus number of customers are also seggregated according the gender. 
-- Step 11 : Ratings Visual was used to represent different ratings mentioned below,
+- Step 1 : Business Requirements.
+- Step 2 : Loading Data to PBI Desktop.
+- Step 3 : Data Profiling & Data Transformations.
+- Step 4 : Primary & Foreign Key.
+- Step 5 : Cardinality
+- Step 6 : Star Schema.
+- Step 7 : Data Model Overview. 
+- Step 8 : A Bar Chart was used to represent Average discount  by Promotion Categories.
 
-  (a) Baggage Handling
+ ![Image](https://github.com/user-attachments/assets/eb1a4839-acaa-4237-879e-b20cf6fe456d) 
 
-  (b) Check-in Services
   
-  (c) Cleanliness
-  
-  (d) Ease of online booking
-  
-  (e) Food & Drink
-  
-  (f) In-flight Entertainment
+- Step 9 : A Line Chart was used to represent Sales Trends By period.
 
-  (g) In-flight Service
+  ![Image](https://github.com/user-attachments/assets/e0927fca-de6e-41da-9acd-4aaf08e43d52)
   
-  (h) In-flight wifi service
   
-  (i) Leg Room service
+- Step 10 : A Map Chart was used to represent Sales By City.
+
+ ![Image](https://github.com/user-attachments/assets/2076b72a-9965-4e5e-b848-973339db833c) 
+
   
-  (j) On-board service
-  
-  (k) Online boarding
-  
-  (l) Seat comfort
-  
-  (m) Departure & arrival time convenience
-  
-In our dataset, Some parameters were assigned value 0, representing those parameters are not applicable for some customers.
+- Step 11 : A Scatter Chart was used to represent profit V/S Net sales.
 
-All these values have been ignored while calculating average rating for each of the parameters mentioned above.
-
-- Step 12 : In the report view, under the insert tab, two text boxes were added to the canvas, in one of them name of the airlines was mentioned & in the other one company's tagline was written.
-- Step 13 : In the report view, under the insert tab, using shapes option from elements group a rectangle was inserted & similarly using image option company's logo was added to the report design area. 
-- Step 14 : Calculated column was created in which, customers were grouped into various age groups.
-
-for creating new column following DAX expression was written;
-       
-        Age Group = 
-        
-        if(airline_passenger_satisfaction[Age]<=25, "0-25 (25 included)",
-        
-        if(airline_passenger_satisfaction[Age]<=50, "25-50 (50 included)",
-        
-        if(airline_passenger_satisfaction[Age]<=75, "50-75 (75 included)",
-        
-        "75-100 (100 included)")))
-        
-Snap of new calculated column ,
-
-![Snap_1](https://user-images.githubusercontent.com/102996550/174089602-ab834a6b-62ce-4b62-8922-a1d241ec240e.jpg)
-
-        
-- Step 15 : New measure was created to find total count of customers.
-
-Following DAX expression was written for the same,
-        
-        Count of Customers = COUNT(airline_passenger_satisfaction[ID])
-        
-A card visual was used to represent count of customers.
-
-![Snap_Count](https://user-images.githubusercontent.com/102996550/174090154-424dc1a4-3ff7-41f8-9617-17a2fb205825.jpg)
-
-        
- - Step 16 : New measure was created to find  % of customers,
- 
- Following DAX expression was written to find % of customers,
- 
-         % Customers = (DIVIDE(airline_passenger_satisfaction[Count of Customers], 129880)*100)
- 
- A card visual was used to represent this perecntage.
- 
- Snap of % of customers who preferred business class
- 
- ![Snap_Percentage](https://user-images.githubusercontent.com/102996550/174090653-da02feb4-4775-4a95-affb-a211ca985d07.jpg)
+  ![Image](https://github.com/user-attachments/assets/0519cd64-288e-46fc-bca4-cc2dc7215b25)
 
  
- - Step 17 : New measure was created to calculate total distance travelled by flights & a card visual was used to represent total distance.
+- Step 12 : A Card visual was used to represent Numbers of Orders.
+
+![Image](https://github.com/user-attachments/assets/a159b09c-ef81-4f7c-9a40-65238ddaf166)
+
+
+- Step 13 : Different Types of Filters in Filters Pane
+
+  
+- Step 14 : Top Bottom 5 Products By Sales, Quantity and Profit.
+
+          
+- Step 15 : A Bar Chart was used to represent top 5 products by sale.
+
+  ![Image](https://github.com/user-attachments/assets/53f06b31-a179-4045-983d-25dd18f16d23)
+
+
+ - Step 16 : A Bar Chart was used to represent Bottom 5 products by sale.
+
+   ![Image](https://github.com/user-attachments/assets/ea2abd65-77d2-41bd-940e-f5f4a0ed47d0)
+
  
- Following DAX expression was written to find total distance,
+ - Step 17 : A Bar Chart was used to represent Top 5 products by Quantity.
+
+   ![Image](https://github.com/user-attachments/assets/fb9c616c-13d7-4305-9b39-b465a7d17317)
+
  
-         Total Distance Travelled = SUM(airline_passenger_satisfaction[Flight Distance])
-    
- A card visual was used to represent this total distance.
+ - Step 18 : A Bar Chart was used to represent Bottom 5 products by Quantity.
+
+ ![Image](https://github.com/user-attachments/assets/ea8ee0ce-e1a9-4eb0-a113-784080b37b98)
  
- 
- ![Snap_3](https://user-images.githubusercontent.com/102996550/174091618-bf770d6c-34c6-44d4-9f5e-49583a6d5f68.jpg)
- 
- - Step 18 : The report was then published to Power BI Service.
- 
- 
-![Publish_Message](https://user-images.githubusercontent.com/102996550/174094520-3a845196-97e6-4d44-8760-34a64abc3e77.jpg)
+- Step 19 : A Bar Chart was used to represent Top 5 products by Profit.
+
+  ![Image](https://github.com/user-attachments/assets/038ef703-070c-4ba2-8c5c-5b558cfac1ef)
+
+- Step 20 : A Bar Chart was used to represent Bottom 5 products by Profit.
+
+  ![Image](https://github.com/user-attachments/assets/71ac6d7e-bac4-4cb0-ab40-127aef357e11)
 
 # Snapshot of Dashboard (Power BI Service)
 
